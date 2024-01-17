@@ -1,0 +1,371 @@
+/* Font files provided by transfonter.org*/
+@font-face {
+    font-family: "bookvar-italic";
+    src: url('../fonts/BookvarItalic/BookvarItalic.eot');
+    src: url('../fonts/BookvarItalic/BookvarItalic.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/BookvarItalic/BookvarItalic.woff2') format('woff2'),
+    url('../fonts/BookvarItalic/BookvarItalic.woff') format('woff'),
+    url('../fonts/BookvarItalic/BookvarItalic.svg#BookvarItalic') format('svg'),
+    url('../fonts/BookvarItalic/BookvarItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+* {
+    padding: 0;
+    animation: fadein 0.5s;
+}
+:root{
+    --grayscale: #424242;
+    --gray-smog: #a4a4a4;
+    --super-blue: #020079;
+}
+.title{
+    font-family: "bookvar-italic", sans-serif;
+    color: white;
+    letter-spacing: 40px;
+    font-size: 108px;
+    text-align: center;
+    text-decoration: none;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#prologue-container{
+    padding: 0;
+    background-color: black;
+    /*margin: -15px;*/
+    display: block;
+}
+#prologue-container p{
+    text-align: center;
+}
+#prologue-container p a{
+    text-decoration: none;
+    color: white;
+    font-size: 40px;
+    font-family: Arial, sans-serif;
+}
+body{
+    background-image: url('../img/injury_bg_dark.jpg');
+    background-size: cover;
+}
+#prologue-container, #header {
+    border: 3px solid white;
+}
+.prologue{
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    font-size: 28px;
+    background-color: black;
+}
+.text-injury{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+    flex: 1;
+}
+.header{
+    padding: 0;
+    display: flex;
+    background-color: black;
+}
+.container{
+    position: relative;
+    background-color: rgba(255, 255, 255, 10%);
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+}
+#div_canvas, #div_form, #div_table {
+    background-color: rgba(255, 255, 255, 50%);
+}
+.header-button{
+    width: 105px;
+    height: 105px;
+    display: block;
+    padding-top: 50px;
+    border: 5px solid var(--super-blue);
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    text-align: center;
+    font-size: 60px;
+}
+.header-button p{
+    font-size: 20px;
+    color: black;
+}
+
+.footer h1{
+    background-color: black;
+    color: white;
+    font-family: "bookvar-italic", sans-serif;
+    margin: -10px;
+    letter-spacing: 2px;
+    font-size: 52px;
+    text-align: center;
+}
+form > h1 {
+    font-family: "bookvar-italic", sans-serif;
+    color: #000000;
+}
+form .button_input_r{
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+    font-family: "bookvar-italic", sans-serif;
+    color: white;
+    background-color: black;
+    font-size: larger;
+    text-align: center;
+    margin: 5px;
+    border: 5px dashed white;
+    text-decoration: none;
+    border-radius: 50%;
+}
+form .button_input_x {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-family: "bookvar-italic", sans-serif;
+    color: white;
+    background-color: black;
+    font-size: large;
+    text-align: center;
+    margin: 5px;
+    border: 3px dashed var(--gray-smog);
+    text-decoration: none;
+    border-radius: 50%;
+}
+form .button_input_x:hover, form .button_input_r:hover {
+    border: 5px solid gray;
+    color: black;
+}
+
+form .button_input_x.active, form .button_input_r.active {
+    border: 5px dashed blue;
+    color: red;
+}
+
+form .button_input_x.active:hover, form .button_input_r.active:hover {
+    border: 5px solid #70001e;
+    color: #70001e;
+}
+form .input_y {
+    background-color: ghostwhite;
+    width: 300px;
+    height: 100px;
+    font-size: larger;
+}
+.clock {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.bar-seconds,
+.number-hours {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.bar-seconds span {
+    position: absolute;
+    transform: rotate(calc(var(--index) * 6deg));
+    inset: -10px;
+    text-align: center;
+}
+.bar-seconds span p {
+    display: inline-block;
+    width: 1px;
+    height: 8px;
+    background: white;
+    border-radius: 2px;
+    box-shadow: 0 0 10px white;
+}
+.bar-seconds span:nth-child(5n) p {
+    background: white;
+    width: 2px;
+    height: 12px;
+    transform: translateY(-1px);
+}
+.number-hours span {
+    position: absolute;
+    transform: rotate(calc(var(--index) * 30deg));
+    inset: 6px;
+    text-align: center;
+}
+.number-hours span p {
+    font-size: 20px;
+    color: white;
+    font-family: "bookvar-italic", sans-serif;
+    text-shadow: 0 0 10px white;
+    transform: rotate(calc(var(--index) * -30deg));
+}
+.hands-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hands-box .hand{
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+}
+.hands-box .hand i {
+    display: inline-block;
+    transform-origin: bottom;
+    border-radius: 50%;
+    box-shadow: 0 0 6px white;
+}
+.hands-box .hours {
+    width: 128px;
+    height: 128px;
+}
+.hands-box .hours i {
+    width: 4px;
+    height: 64px;
+    background: white;
+}
+.hands-box .minutes {
+    width: 180px;
+    height: 180px;
+}
+.hands-box .minutes::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 4px white;
+}
+.hands-box .minutes i {
+    width: 4px;
+    height: 90px;
+    background: white;
+}
+.hands-box .seconds {
+    width: 192px;
+    height: 192px;
+}
+.hands-box .seconds::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    z-index: 4;
+    box-shadow: 0 0 4px white;
+}
+.hands-box .seconds i {
+    width: 3px;
+    height: calc(96px + 28px);
+    background: white;
+    box-shadow: none;
+}
+#div_canvas, #div_form, #div_table {
+    float: right;
+    width: 33%;
+}
+
+#div_form {
+    border: 1px solid black;
+}
+
+#div_form:hover {
+    border: 1px solid red;
+}
+
+@media (max-width: 1400px) {
+    #div_canvas, #div_form, #div_table {
+        width: 100%;
+    }
+}
+
+/*---------------------------------------------------------------------*/
+canvas {
+    border: 1px dashed black;
+}
+
+canvas:hover {
+    border: 1px solid red;
+}
+
+/*---------------------------------------------------------------------*/
+
+.container form > p {
+    margin-bottom: 10px;
+}
+
+p.error-message {
+    color: red;
+}
+
+.container form input[type="submit"], .container form input[type="submit"] {
+    margin: 5px;
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px dashed blue;
+}
+
+.container div form p {
+    margin-top: 40px;
+}
+
+
+
+.container form input[type="text"] {
+    padding: 10px;
+    border-radius: 15px;
+}
+
+/*-------------------------------------------------------------------------------------------------------*/
+
+.container table {
+    margin: 10px auto;
+}
+
+.content td {
+    color: black;
+    font-size: 18px;
+}
+
+th, td {
+    padding: 10px;
+}
+
+td:hover {
+    font-style: italic;
+}
+
+table, td, th {
+    border: 3px solid white;
+    background: black;
+    color: white;
+}

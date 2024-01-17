@@ -1,46 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Created by IntelliJ IDEA.
-  User: zerumi
-  Date: 27.10.2023
-  Time: 18:41
--->
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Test for managed beans</title>
+    <title>Lab3_XVIIstarPt_index</title>
+    <link rel="shortcut icon" href="assets/img/injury_logo.png" type="image/x-icon"/>
+    <link id="theme" rel="stylesheet" href="assets/css/injury_blue.css" type="text/css"/>
 </h:head>
 
-<h:body>
-    <h:form>
-        <h:outputLabel for="x" value="Coordinate X (-5; 5)"/>
-        <h:inputText id="x" styleClass="coords-input" value="#{xBean.x}"
-                     required="true" maxlength="7"
-                     requiredMessage="Value X is required"
-                     validatorMessage="The value must be from -5 to 5">
-            <f:converter converterId="jakarta.faces.Double"/>
-            <f:validateDoubleRange minimum="-5" maximum="5"/>
-        </h:inputText>
+<h:body style="padding: 0; margin: 0">
+    <div class="container">
+        <div id="prologue-container">
+            <p><h:link outcome="goToMain">Лабораторная работа №3</h:link></p>
+        </div>
+        <div class="header">
+            <h:link class="title" outcome="goToMain">INJURY</h:link>
+            <div class="clock">
+                <div class="bar-seconds"></div>
+                <div class="number-hours"></div>
+                <div class="hands-box">
+                    <div class="hand hours"><i></i></div>
+                    <div class="hand minutes"><i></i></div>
+                    <div class="hand seconds"><i></i></div>
+                </div>
+            </div>
+            <div class="text-injury">
+                <h4>Болорболд Аригуун</h4>
+                <h4>P3211</h4>
+                <h4>Вариант 3552</h4>
+            </div>
+            <div class="buttons">
+                <button class="header-button" onclick="changeTheme()"><p>ТЕМА</p></button>
+            </div>
 
-        <h:commandButton value="Send" styleClass="submit-btn">
-            <f:ajax execute="@form" listener="#{resultsControllerBean.addResult(xBean.x)}" render="@form results-table"/>
-        </h:commandButton>
-    </h:form>
-
-    <h:dataTable id="results-table" var="result" value="#{resultsControllerBean.results}">
-        <h:column>
-            <f:facet name="header">
-                <h:outputText value="x"/>
-            </f:facet>
-            <h:outputText value="#{result}"/>
-        </h:column>
-    </h:dataTable>
+        </div>
+        <div>
+            <p:video value="/assets/img/injury_blue.mp4"
+                     autoplay="true"
+                     preload="true"
+                     loop="true"
+                     controls="true"
+                     width="1899">
+            </p:video>
+        </div>
+    </div>
+    <div class="footer">
+        <h1>XVIIstarPt_ | MMXXIV</h1>
+    </div>
 </h:body>
-
+<script src="assets/js/injury_index_script.js" type="text/javascript"></script>
 </html>
