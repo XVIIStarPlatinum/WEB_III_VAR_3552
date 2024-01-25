@@ -39,7 +39,6 @@
 #prologue-container{
     padding: 0;
     background-color: black;
-    /*margin: -15px;*/
     display: block;
 }
 #prologue-container p{
@@ -88,6 +87,9 @@ body{
 }
 #div_canvas, #div_form, #div_table {
     background-color: rgba(255, 255, 255, 50%);
+}
+.buttons{
+
 }
 .header-button{
     width: 105px;

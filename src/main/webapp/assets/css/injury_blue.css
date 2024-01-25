@@ -41,7 +41,6 @@
 #prologue-container{
     padding: 0;
     background-color: var(--super-blue);
-    /*margin: -15px;*/
     display: block;
 }
 #prologue-container p{
@@ -89,7 +88,9 @@ body{
     justify-content: center;
     align-items: center;
 }
+.buttons{
 
+}
 .header-button{
     width: 105px;
     height: 105px;

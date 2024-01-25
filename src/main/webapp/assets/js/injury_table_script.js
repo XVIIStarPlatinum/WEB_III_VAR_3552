@@ -9,6 +9,10 @@ function handleClickX(event) {
         btn.classList.remove("active");
     }
     event.source.classList.add("active");
+    if(Number(document.getElementsByClassName("button_input_x active")[0].innerText) === -4 ||
+        Number(document.getElementsByClassName("button_input_x active")[0].innerText) === -5){
+        updateCanvas();
+    }
 }
 function handleClickR(event) {
     if (event.status !== "success") return;
@@ -17,6 +21,7 @@ function handleClickR(event) {
         btn.classList.remove("active");
     }
     event.source.classList.add("active");
+    updateCanvas();
 }
 function validateY() {
     return getErrorY() === "";
@@ -52,7 +57,7 @@ function getErrorY() {
     if (String(y).length > 7) {
         return "Y должен быть числом, состоящим из менее 8 символов (<= 7)";
     }
-    if (-5 > y || y > 3) {
+    if (!(-5 <= y <= 3)) {
         return "Y на промежутке [-5;3]";
     }
     return "";
@@ -60,23 +65,25 @@ function getErrorY() {
 let centerX = 225;
 let centerY = 225;
 let R = 200;
-let DEFAULT_R_ = 2;
+let DEFAULT_R_ = 1;
 let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
-context.font = "16px Verdana";
-context.font = "16px Verdana";
+context.font = "20px Verdana";
 
 function drawPoint(x, y, delta = 2) {
     context.rect(x - delta / 2, y - delta / 2, delta, delta);
 }
 
 function get_r_() {
-    let input_r = document.getElementsByClassName("p_input_r")[0];
-
-    if (isNaN(+input_r.value) || +input_r.value < 2 || +input_r.value > 5) {
+    let x_var = Number(document.getElementsByClassName("button_input_x active")[0].innerText);
+    let input_r = Number(document.getElementsByClassName("button_input_r active")[0].innerText);
+    if(x_var === -4 || x_var === -5) {
+        return Math.abs(x_var);
+    }
+    if (isNaN(input_r) || +input_r.value < 1 || +input_r.value > 3) {
         return DEFAULT_R_;
     }
-    return +input_r.value;
+    return input_r;
 }
 
 function drawPointForJSF(mathX, mathY, color = "red", delta = 4) {
@@ -94,11 +101,13 @@ function drawPointForJSF(mathX, mathY, color = "red", delta = 4) {
 }
 
 function drawTextWithDeltaX(text, x, y, delta = 4) {
+    context.fillStyle = "#FFFFFF";
     context.fillText(text, x + delta, y);
     drawPoint(x, y);
 }
 
 function drawTextWithDeltaY(text, x, y, delta = 4) {
+    context.fillStyle = "#FFFFFF";
     context.fillText(text, x, y - delta);
     drawPoint(x, y);
 }
@@ -209,7 +218,20 @@ function updateCanvas() {
         }
     }
 }
-
+function nearestX(x){
+    let xValues = [-5, -4, -3, -2, -1, 0, 1, 2, 3];
+    let closest = xValues[0];
+    let closestDiff = Math.abs(x - closest);
+    for (let i = 1; i < xValues.length; i++) {
+        let current = xValues[i];
+        let currentDiff = Math.abs(x - current);
+        if (currentDiff < closestDiff) {
+            closest = current;
+            closestDiff = currentDiff;
+        }
+    }
+    return closest;
+}
 updateCanvas();
 
 canvas.onclick = (event) => {
@@ -222,16 +244,15 @@ canvas.onclick = (event) => {
 
     let r_ = get_r_();
 
-    let x_ = mathX / R * r_;
+    let x_ = nearestX(mathX / R * r_);
     let y_ = mathY / R * r_;
+    console.log(x_, y_);
 
-
-    updateCanvas(
+    addAttempt(
         [
             {name: "x", value: x_.toString()},
             {name: "y", value: y_.toString()},
             {name: "r", value: r_.toString()},
         ]
     )
-
 }

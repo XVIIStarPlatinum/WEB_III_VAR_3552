@@ -2,14 +2,21 @@ package example.repository;
 
 import example.entity.ResultEntity;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.Root;
+import lombok.Getter;
 
 import java.util.Collection;
-
+import java.util.Properties;
+@Getter
 public class ResultRepository implements Repository {
     private final EntityManager entityManager = JPAUtils.getFactory().createEntityManager();
-
+//    public ResultRepository(String unitName, Properties properties){
+//        EntityManagerFactory factory = Persistence.createEntityManagerFactory(unitName, properties);
+//        entityManager = factory.createEntityManager();
+//    }
     @Override
     public void addNewResult(ResultEntity result) {
         entityManager.getTransaction().begin();

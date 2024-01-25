@@ -27,7 +27,6 @@ public class ResultsControllerBean implements Serializable {
 
     @PostConstruct
     public void init() {
-
         var resultsEntities = DAOFactory.getInstance().getResultDAO().getAllResults();
         results = new ArrayList<>(resultsEntities);
     }
@@ -37,21 +36,24 @@ public class ResultsControllerBean implements Serializable {
         ResultEntity entity = ResultEntity.builder().x(x).y(y).r(r).hitResult(hitResult).build();
         results.add(entity);
         DAOFactory.getInstance().getResultDAO().addNewResult(entity);
-
-        String script = String.format(Locale.US, "drawPointForJSF(%n, %d, %,f, %,f, true);", x, y, r, hitResult);
-        FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add(script);
     }
+
     public void updateCanvas(double r) {
+        addFromCanvas();
         for (ResultEntity en : results) {
             boolean result = AreaChecker.checkHit(en.getX(), en.getY(), r);
             en.setR(r);
             en.setHitResult(result);
-
-            String script = String.format(Locale.US, "window.drawPointsForJSF(%n, %d, %f, %b, true);", en.getX(), en.getY(), r, result);
-            System.out.println("Script: " + script);
-            FacesContext.getCurrentInstance().getPartialViewContext().getEvalScripts().add(script);
         }
     }
+
+    public void addFromCanvas() {
+        String strX = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("x");
+        String strY = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("y");
+        String strR = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("r");
+        addResult(Integer.parseInt(strX), Double.parseDouble(strY), Double.parseDouble(strR));
+    }   
+
     public void clearResults() {
         DAOFactory.getInstance().getResultDAO().clearResults();
         results.clear();

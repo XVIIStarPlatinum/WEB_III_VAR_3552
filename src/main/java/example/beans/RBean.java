@@ -18,12 +18,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class RBean implements Serializable{
     private Double r = 0.0;
+
     public void validateRBeanValue(FacesContext facesContext, UIComponent uiComponent, Object o){
         if (o == null){
             FacesMessage message = new FacesMessage("R should be between 1 and 3 and divisible by 0,5.");
             throw new ValidatorException(message);
         }
     }
+
     @PostConstruct
     public void init(){
         if(r == null || r == 0.0){

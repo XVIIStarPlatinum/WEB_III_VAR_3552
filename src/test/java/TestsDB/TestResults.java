@@ -1,31 +1,28 @@
 package TestsDB;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import example.service.AreaChecker;
-import example.beans.ResultsControllerBean;
-import org.junit.ClassRule;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import example.entity.ResultEntity;
+import example.repository.ResultRepository;
+import org.junit.jupiter.api.*;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.shaded.com.google.common.collect.HashMultiset;
-import org.testcontainers.shaded.org.checkerframework.checker.units.qual.A;
 
-import java.sql.*;
-import java.util.LinkedList;
+import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+@DisplayName("ResultRepository test")
 @Testcontainers
 public class TestResults {
-    @ClassRule
-    public static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:15.0").withDatabaseName("point_model").withUsername("postgres").withPassword("240854");
 
+    private static PostgreSQLContainer<?> postgreSQLContainer;
+    private static ResultRepository repository;
     @BeforeAll
     public static void beforeAll(){
+        postgreSQLContainer = new PostgreSQLContainer<>()
+                .withDatabaseName("test")
+                .withUsername("test")
+                .withPassword("test")
+                .withExposedPorts(5432);
         postgreSQLContainer.start();
+        repository = new ResultRepository();
     }
     @AfterAll
     public static void afterAll(){
@@ -33,16 +30,22 @@ public class TestResults {
     }
 
     @Test
-    public void insertPointTest() throws SQLException {
-
+    @Order(value = 1)
+    public void insertPointTest(){
+        repository.addNewResult(new ResultEntity(1, 1, 1F, 1F, false));
+        Assertions.assertEquals(1, repository.getEntityManager().createQuery("SELECT a from ResultEntity as a").getResultList().size());
     }
     @Test
-    public void truncateTest() throws SQLException {
-
+    @Order(value = 2)
+    public void getAllResultsTest(){
+        List<ResultEntity> results = (List<ResultEntity>) repository.getAllResults();
+        Assertions.assertEquals(results.size(), repository.getEntityManager().createQuery("SELECT a from ResultEntity as a").getResultList().size());
     }
     @Test
-    public void getAllResultsTest() throws SQLException {
-
-
+    @Order(value = 3)
+    public void truncateTest(){
+        repository.clearResults();
+        Assertions.assertEquals(0, repository.getEntityManager().createQuery("SELECT a from ResultEntity as a").getResultList().size());
     }
+
 }
