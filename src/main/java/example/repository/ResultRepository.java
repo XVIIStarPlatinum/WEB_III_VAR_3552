@@ -8,15 +8,15 @@ import jakarta.persistence.Query;
 import jakarta.persistence.criteria.Root;
 import lombok.Getter;
 
-import java.util.Collection;
 import java.util.Properties;
+import java.util.Collection;
+
 @Getter
 public class ResultRepository implements Repository {
-    private final EntityManager entityManager = JPAUtils.getFactory().createEntityManager();
-//    public ResultRepository(String unitName, Properties properties){
-//        EntityManagerFactory factory = Persistence.createEntityManagerFactory(unitName, properties);
-//        entityManager = factory.createEntityManager();
-//    }
+    private final EntityManager entityManager;
+    public ResultRepository(){
+         entityManager = JPAUtils.getFactory().createEntityManager();
+    }
     @Override
     public void addNewResult(ResultEntity result) {
         entityManager.getTransaction().begin();

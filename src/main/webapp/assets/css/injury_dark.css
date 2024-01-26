@@ -52,7 +52,7 @@
 }
 body{
     background-image: url('../img/injury_bg_dark.jpg');
-    background-size: cover;
+    background-size: contain;
 }
 #prologue-container, #header {
     border: 3px solid white;
@@ -352,6 +352,18 @@ p.error-message {
 .container table {
     margin: 10px auto;
 }
+.employeeTableHeader {
+    background-color: var(--gray-smog);
+    color: black;
+}
+.employeeTableOddRow {
+    background-color: var(--grayscale);
+    color: whitesmoke;
+}
+.employeeTableEvenRow {
+    background-color: var(--gray-smog);
+    color: black;
+}
 
 .content td {
     color: black;
@@ -363,11 +375,12 @@ th, td {
 }
 
 td:hover {
+    background-color: black;
+    color: white;
     font-style: italic;
 }
 
 table, td, th {
-    border: 3px solid white;
-    background: black;
-    color: white;
+    border: 3px solid black;
+    text-align: center;
 }

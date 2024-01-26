@@ -1,6 +1,5 @@
 package example.repository;
 
-import java.util.Properties;
 
 public class DAOFactory {
     private static Repository repository;

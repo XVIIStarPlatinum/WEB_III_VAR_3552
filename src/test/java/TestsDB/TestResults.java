@@ -12,28 +12,29 @@ import java.util.List;
 @Testcontainers
 public class TestResults {
 
-    private static PostgreSQLContainer<?> postgreSQLContainer;
-    private static ResultRepository repository;
+    static PostgreSQLContainer<?> postgreSQLContainer;
+    static ResultRepository repository;
+
     @BeforeAll
     public static void beforeAll(){
-        postgreSQLContainer = new PostgreSQLContainer<>()
-                .withDatabaseName("test")
-                .withUsername("test")
-                .withPassword("test")
-                .withExposedPorts(5432);
+        postgreSQLContainer = new PostgreSQLContainer<>("postgres:15-alpine");
         postgreSQLContainer.start();
-        repository = new ResultRepository();
     }
     @AfterAll
     public static void afterAll(){
         postgreSQLContainer.stop();
     }
-
+    @BeforeEach
+    void setUp(){
+        repository = new ResultRepository();
+    }
     @Test
     @Order(value = 1)
     public void insertPointTest(){
-        repository.addNewResult(new ResultEntity(1, 1, 1F, 1F, false));
-        Assertions.assertEquals(1, repository.getEntityManager().createQuery("SELECT a from ResultEntity as a").getResultList().size());
+        int size = repository.getAllResults().size();
+        ResultEntity result = new ResultEntity(1, 1, 1F, 1F, false);
+        repository.addNewResult(result);
+        Assertions.assertEquals(size + 1, repository.getEntityManager().createQuery("SELECT a from ResultEntity as a").getResultList().size());
     }
     @Test
     @Order(value = 2)
